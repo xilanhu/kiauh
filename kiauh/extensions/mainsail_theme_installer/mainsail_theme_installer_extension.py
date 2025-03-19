@@ -75,7 +75,7 @@ class MainsailThemeInstallerExtension(BaseExtension):
 # noinspection PyMethodMayBeStatic
 class MainsailThemeInstallMenu(BaseMenu):
     THEMES_URL: str = (
-        "https://raw.githubusercontent.com/mainsail-crew/gb-docs/main/_data/themes.csv"
+        "https://ghfast.top/https://raw.githubusercontent.com/mainsail-crew/gb-docs/main/_data/themes.csv"
     )
 
     def __init__(self, instances: List[Klipper]):
@@ -142,7 +142,7 @@ class MainsailThemeInstallMenu(BaseMenu):
         theme_data: ThemeData = self.themes[index]
         theme_author: str = theme_data.author
         theme_repo: str = theme_data.repo
-        theme_repo_url: str = f"https://github.com/{theme_author}/{theme_repo}"
+        theme_repo_url: str = f"https://ghfast.top/https://github.com/{theme_author}/{theme_repo}"
 
         print_instance_overview(
             self.instances,
