@@ -12,7 +12,7 @@ from core.backup_manager import BACKUP_ROOT_DIR
 from core.constants import SYSTEMD
 
 # repo
-KLIPPERSCREEN_REPO = "https://github.com/KlipperScreen/KlipperScreen.git"
+KLIPPERSCREEN_REPO = "https://ghfast.top/https://github.com/KlipperScreen/KlipperScreen.git"
 
 # names
 KLIPPERSCREEN_SERVICE_NAME = "KlipperScreen.service"
