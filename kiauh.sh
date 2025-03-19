@@ -39,22 +39,8 @@ function update_kiauh() {
 #===================================================#
 
 function kiauh_update_avail() {
-  [[ ! -d "${KIAUH_SRCDIR}/.git" ]] && return
-  local origin head
-
-  cd "${KIAUH_SRCDIR}"
-
-  ### abort if not on master branch
-  ! git branch -a | grep -q "\* master" && return
-
-  ### compare commit hash
-  git fetch -q
-  origin=$(git rev-parse --short=8 origin/master)
-  head=$(git rev-parse --short=8 HEAD)
-
-  if [[ ${origin} != "${head}" ]]; then
-    echo "true"
-  fi
+	echo "false"
+	return
 }
 
 function save_startup_version() {

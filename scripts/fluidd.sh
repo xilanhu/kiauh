@@ -364,7 +364,7 @@ function get_fluidd_download_url() {
   local releases_by_tag tags tag unstable_url url
 
   ### latest stable download url
-  url="https://github.com/fluidd-core/fluidd/releases/latest/download/fluidd.zip"
+  url="https://ghfast.top/https://github.com/fluidd-core/fluidd/releases/latest/download/fluidd.zip"
 
   read_kiauh_ini "${FUNCNAME[0]}"
   if [[ ${fluidd_install_unstable} == "true" ]]; then
@@ -373,7 +373,7 @@ function get_fluidd_download_url() {
     tag=$(echo "${tags}" | head -1)
 
     ### latest unstable download url including pre-releases (alpha, beta, rc)
-    unstable_url="https://github.com/fluidd-core/fluidd/releases/download/${tag}/fluidd.zip"
+    unstable_url="https://ghfast.top/https://github.com/fluidd-core/fluidd/releases/download/${tag}/fluidd.zip"
 
     if [[ ${unstable_url} == *"download//"* ]]; then
       warn_msg "Download URL broken! Falling back to URL of latest stable release!"
