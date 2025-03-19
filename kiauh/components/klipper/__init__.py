@@ -13,7 +13,7 @@ from core.backup_manager import BACKUP_ROOT_DIR
 
 MODULE_PATH = Path(__file__).resolve().parent
 
-KLIPPER_REPO_URL = "https://github.com/Klipper3d/klipper.git"
+KLIPPER_REPO_URL = "https://ghfast.top/https://github.com/Klipper3d/klipper.git"
 
 # names
 KLIPPER_LOG_NAME = "klippy.log"
