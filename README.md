@@ -71,7 +71,7 @@ sudo apt-get update && sudo apt-get install git -y
 克隆仓库至用户目录：
 
 ```shell
-cd ~ && git clone https://ghfast.top/https://github.com/dw-0/kiauh.git
+cd ~ && git clone https://ghfast.top/https://github.com/xilanhu/kiauh.git
 ```
 
 * **Step 3:** \
