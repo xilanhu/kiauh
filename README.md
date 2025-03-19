@@ -1,12 +1,12 @@
 <p align="center">
   <a>
     <img src="https://raw.githubusercontent.com/dw-0/kiauh/master/resources/screenshots/kiauh.png" alt="KIAUH logo" height="181">
-    <h1 align="center">Klipper Installation And Update Helper</h1>
+    <h1 align="center">Klipper安装与更新助手</h1>
   </a>
 </p>
 
 <p align="center">
-  A handy installation script that makes installing Klipper (and more) a breeze!
+  一款便捷的安装脚本，让Klipper（及其他组件）的安装变得轻松简单！
 </p>
 
 <p align="center">
@@ -58,33 +58,31 @@ to the SD card before proceeding further (usually done with Balena Etcher in tho
 and operate on the Linux Distribution you are going to flash. You likely will have the most success with
 distributions based on Debian 11 Bullseye. Read the notes further down below in this document.
 
-### 💾 Download and use KIAUH
-**📢 Disclaimer: Usage of this script happens at your own risk!**
+### 💾  下载与使用 KIAUH
+**📢 免责声明：使用本脚本需自行承担风险！**
 
 * **Step 1:** \
-To download this script, it is necessary to have git installed. If you don't have git already installed, or if you are unsure, run the following command:
+安装 git（如未安装）：
 ```shell
 sudo apt-get update && sudo apt-get install git -y
 ```
 
 * **Step 2:** \
-Once git is installed, use the following command to download KIAUH into your home-directory:
+克隆仓库至用户目录：
 
 ```shell
 cd ~ && git clone https://ghfast.top/https://github.com/dw-0/kiauh.git
 ```
 
 * **Step 3:** \
-Finally, start KIAUH by running the next command:
+运行脚本：
 
 ```shell
 ./kiauh/kiauh.sh
 ```
 
 * **Step 4:** \
-You should now find yourself in the main menu of KIAUH. You will see several actions to choose from depending
-on what you want to do. To choose an action, simply type the corresponding number into the "Perform action"
-prompt and confirm by hitting ENTER.
+进入主菜单后，按提示输入对应数字选择操作，按回车确认
 
 <hr>
 
