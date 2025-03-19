@@ -11,7 +11,7 @@ from pathlib import Path
 MODULE_PATH = Path(__file__).resolve().parent
 
 # repo
-OBICO_REPO = "https://github.com/TheSpaghettiDetective/moonraker-obico.git"
+OBICO_REPO = "https://ghfast.top/https://github.com/TheSpaghettiDetective/moonraker-obico.git"
 
 # names
 OBICO_SERVICE_NAME = "moonraker-obico.service"
