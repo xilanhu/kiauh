@@ -29,16 +29,13 @@
 </h2>
 
 ### 🔧 修改
-
 本Kiauh进行了如下修改
-
 -禁用了Kiauh自动更新及检测
 -对下载进行了加速
 
 <br>
 
 ### 📋 加速源
-
 -使用[ghfast](https://ghfast.top/)的加速源对Github进行加速下载,解决了klipper下载慢问题
  如觉得对你有帮助可以[赞助](https://ghfast.top/donate)以支持其服务的稳定运行
 
