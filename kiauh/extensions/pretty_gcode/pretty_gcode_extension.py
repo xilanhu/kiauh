@@ -23,7 +23,7 @@ from utils.sys_utils import cmd_sysctl_service, get_ipv4_addr
 
 MODULE_PATH = Path(__file__).resolve().parent
 PGC_DIR = Path.home().joinpath("pgcode")
-PGC_REPO = "https://github.com/Kragrathea/pgcode"
+PGC_REPO = "https://ghfast.top/https://github.com/Kragrathea/pgcode"
 PGC_CONF = "pgcode.local.conf"
 
 
