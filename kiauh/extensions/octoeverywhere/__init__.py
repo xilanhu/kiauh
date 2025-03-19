@@ -9,7 +9,7 @@
 from pathlib import Path
 
 # repo
-OE_REPO = "https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git"
+OE_REPO = "https://ghfast.top/https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git"
 
 # directories
 OE_DIR = Path.home().joinpath("octoeverywhere")
