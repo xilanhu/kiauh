@@ -31,12 +31,12 @@ class FluiddConfigWeb(BaseWebClientConfig):
     config_filename: str = "fluidd.cfg"
     config_section: str = f"include {config_filename}"
     backup_dir: Path = BACKUP_ROOT_DIR.joinpath("fluidd-config-backups")
-    repo_url: str = "https://github.com/fluidd-core/fluidd-config.git"
+    repo_url: str = "https://ghfast.top/https://github.com/fluidd-core/fluidd-config.git"
 
 
 @dataclass()
 class FluiddData(BaseWebClient):
-    BASE_DL_URL = "https://github.com/fluidd-core/fluidd/releases"
+    BASE_DL_URL = "https://ghfast.top/https://github.com/fluidd-core/fluidd/releases"
 
     client: WebClientType = WebClientType.FLUIDD
     name: str = client.value
