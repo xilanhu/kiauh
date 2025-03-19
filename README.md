@@ -69,6 +69,9 @@ cd ~ && git clone https://ghfast.top/https://github.com/xilanhu/kiauh.git
 * **Step 4:** \
 进入主菜单后，按提示输入对应数字选择操作，按回车确认
 
+<br>
+<br>
+
 
 <h2 align="center">🌐 资源与扩展信息</h2>
 
