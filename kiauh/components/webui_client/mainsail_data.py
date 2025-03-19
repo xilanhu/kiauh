@@ -31,12 +31,12 @@ class MainsailConfigWeb(BaseWebClientConfig):
     config_filename: str = "mainsail.cfg"
     config_section: str = f"include {config_filename}"
     backup_dir: Path = BACKUP_ROOT_DIR.joinpath("mainsail-config-backups")
-    repo_url: str = "https://github.com/mainsail-crew/mainsail-config.git"
+    repo_url: str = "https://ghfast.top/https://github.com/mainsail-crew/mainsail-config.git"
 
 
 @dataclass()
 class MainsailData(BaseWebClient):
-    BASE_DL_URL: str = "https://github.com/mainsail-crew/mainsail/releases"
+    BASE_DL_URL: str = "https://ghfast.top/https://github.com/mainsail-crew/mainsail/releases"
 
     client: WebClientType = WebClientType.MAINSAIL
     name: str = WebClientType.MAINSAIL.value
