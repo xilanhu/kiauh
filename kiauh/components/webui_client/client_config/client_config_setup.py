@@ -39,12 +39,12 @@ def install_client_config(client_data: BaseWebClient, cfg_backup=True) -> None:
     display_name = client_config.display_name
 
     if detect_client_cfg_conflict(client_data):
-        Logger.print_info("Another Client-Config is already installed! Skipped ...")
+        Logger.print_info("已存在控制界面的配置! 跳过 ...")
         return
 
     if client_config.config_dir.exists():
         print_client_already_installed_dialog(display_name)
-        if get_confirm(f"Re-install {display_name}?", allow_go_back=True):
+        if get_confirm(f"重新安装 {display_name}?", allow_go_back=True):
             shutil.rmtree(client_config.config_dir)
         else:
             return
@@ -74,31 +74,31 @@ def install_client_config(client_data: BaseWebClient, cfg_backup=True) -> None:
         InstanceManager.restart_all(kl_instances)
 
     except Exception as e:
-        Logger.print_error(f"{display_name} installation failed!\n{e}")
+        Logger.print_error(f"{display_name} 安装时发生错误!\n{e}")
         return
 
-    Logger.print_ok(f"{display_name} installation complete!", start="\n")
+    Logger.print_ok(f"{display_name} 安装完成!", start="\n")
 
 
 def download_client_config(client_config: BaseWebClientConfig) -> None:
     try:
-        Logger.print_status(f"Downloading {client_config.display_name} ...")
+        Logger.print_status(f"正在下载 {client_config.display_name} ...")
         repo = client_config.repo_url
         target_dir = client_config.config_dir
         git_clone_wrapper(repo, target_dir)
     except Exception:
-        Logger.print_error(f"Downloading {client_config.display_name} failed!")
+        Logger.print_error(f"下载时 {client_config.display_name} 发生错误!")
         raise
 
 
 def update_client_config(client: BaseWebClient) -> None:
     client_config: BaseWebClientConfig = client.client_config
 
-    Logger.print_status(f"Updating {client_config.display_name} ...")
+    Logger.print_status(f"正在更新 {client_config.display_name} ...")
 
     if not client_config.config_dir.exists():
         Logger.print_info(
-            f"Unable to update {client_config.display_name}. Directory does not exist! Skipping ..."
+            f"无法更新 {client_config.display_name}. 目录不存在! 跳过 ..."
         )
         return
 
@@ -108,19 +108,19 @@ def update_client_config(client: BaseWebClient) -> None:
 
     git_pull_wrapper(client_config.repo_url, client_config.config_dir)
 
-    Logger.print_ok(f"Successfully updated {client_config.display_name}.")
-    Logger.print_info("Restart Klipper to reload the configuration!")
+    Logger.print_ok(f"成功更新 {client_config.display_name}.")
+    Logger.print_info("重新启动 Klipper 以重新加载配置!")
 
 
 def create_client_config_symlink(
     client_config: BaseWebClientConfig, klipper_instances: List[Klipper]
 ) -> None:
     for instance in klipper_instances:
-        Logger.print_status(f"Create symlink for {client_config.config_filename} ...")
+        Logger.print_status(f"正在为 {client_config.config_filename} 创建系统链接...")
         source = Path(client_config.config_dir, client_config.config_filename)
         target = instance.base.cfg_dir
-        Logger.print_status(f"Linking {source} to {target}")
+        Logger.print_status(f"链接 {source} 到 {target}")
         try:
             create_symlink(source, target)
         except subprocess.CalledProcessError:
-            Logger.print_error("Creating symlink failed!")
+            Logger.print_error("创建系统链接失败!")
