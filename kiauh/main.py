@@ -26,4 +26,4 @@ def main() -> None:
         ensure_encoding()
         MainMenu().run()
     except KeyboardInterrupt:
-        Logger.print_ok("\nHappy printing!\n", prefix=False)
+        Logger.print_ok("\n打印愉快!\n", prefix=False)
