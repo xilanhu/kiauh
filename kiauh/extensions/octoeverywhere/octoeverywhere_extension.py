@@ -75,7 +75,7 @@ class OctoeverywhereExtension(BaseExtension):
             Logger.print_dialog(
                 DialogType.INFO,
                 [
-                    发现以下 Moonraker 服务:",
+                    "发现以下 Moonraker 服务:",
                     *mr_names,
                     "\n\n",
                     "安装程序将为 OctoEverywhere 应用相同的名称!",
