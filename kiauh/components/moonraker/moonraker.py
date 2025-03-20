@@ -65,7 +65,7 @@ class Moonraker:
     def create(self) -> None:
         from utils.sys_utils import create_env_file, create_service_file
 
-        Logger.print_status("Creating new Moonraker Instance ...")
+        Logger.print_status("创建新的 Moonraker 服务 ...")
 
         try:
             create_folders(self.base.base_folders)
@@ -80,10 +80,10 @@ class Moonraker:
             )
 
         except CalledProcessError as e:
-            Logger.print_error(f"Error creating instance: {e}")
+            Logger.print_error(f"创建服务时发生错误: {e}")
             raise
         except OSError as e:
-            Logger.print_error(f"Error creating env file: {e}")
+            Logger.print_error(f"创建env文件时发生错误: {e}")
             raise
 
     def _prep_service_file_content(self) -> str:
@@ -93,7 +93,7 @@ class Moonraker:
             with open(template, "r") as template_file:
                 template_content = template_file.read()
         except FileNotFoundError:
-            Logger.print_error(f"Unable to open {template} - File not found")
+            Logger.print_error(f"无法打开 {template} - 找不到文件")
             raise
 
         service_content = template_content.replace(
@@ -121,7 +121,7 @@ class Moonraker:
             with open(template, "r") as env_file:
                 env_template_file_content = env_file.read()
         except FileNotFoundError:
-            Logger.print_error(f"Unable to open {template} - File not found")
+            Logger.print_error(f"无法打开 {template} - 找不到文件")
             raise
 
         env_file_content = env_template_file_content.replace(
