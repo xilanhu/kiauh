@@ -36,7 +36,7 @@ from utils.git_utils import rollback_repository
 class AdvancedMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None) -> None:
         super().__init__()
-        self.title = "Advanced Menu"
+        self.title = "高级菜单"
         self.title_color = Color.YELLOW
         self.previous_menu: Type[BaseMenu] | None = previous_menu
 
@@ -61,13 +61,13 @@ class AdvancedMenu(BaseMenu):
         menu = textwrap.dedent(
             """
             ╟───────────────────────────┬───────────────────────────╢
-            ║ Klipper Firmware:         │ Repository Rollback:      ║
-            ║  1) [Build]               │  6) [Klipper]             ║
-            ║  2) [Flash]               │  7) [Moonraker]           ║
-            ║  3) [Build + Flash]       │                           ║
-            ║  4) [Get MCU ID]          │ System:                   ║
-            ║                           │  8) [Change hostname]     ║
-            ║ Extra Dependencies:       │                           ║
+            ║ Klipper 固件:             │ 存储库回滚:               ║
+            ║  1) [编译]                │  6) [Klipper]             ║
+            ║  2) [刷入]                │  7) [Moonraker]           ║
+            ║  3) [编译 + 刷入]         │                           ║
+            ║  4) [获取 MCU ID]         │ 系统:                     ║
+            ║                           │  8) [更改主机名]          ║
+            ║ 额外依赖项:               │                           ║
             ║  5) [Input Shaper]        │                           ║
             ╟───────────────────────────┴───────────────────────────╢
             """
