@@ -87,8 +87,8 @@ function launch_kiauh_v6() {
   local entrypoint
 
   if ! command -v python3 &>/dev/null || [[ $(python3 -V | cut -d " " -f2 | cut -d "." -f2) -lt 8 ]]; then
-    echo "Python 3.8 or higher is not installed!"
-    echo "Please install Python 3.8 or higher and try again."
+    echo "未安装Python 3.8或更高版本!"
+    echo "请安装Python 3.8或更高版本，然后重试."
     exit 1
   fi
 
@@ -109,25 +109,25 @@ function main() {
     launch_kiauh_v6
   else
     top_border
-    echo -e "|         ${green}KIAUH v6.0.0-alpha1 is available now!${white}         |"
+    echo -e "|            ${green}KIAUH v6.0.0-alpha 1现已推出!${white}                |"
     hr
-    echo -e "|         View Changelog: ${magenta}https://git.io/JnmlX${white}          |"
+    echo -e "|         查看更新日志: ${magenta}https://git.io/JnmlX${white}            |"
     blank_line
-    echo -e "| KIAUH v6 was completely rewritten from the ground up. |"
-    echo -e "| It's based on Python 3.8 and has many improvements.   |"
+    echo -e "| KIAUH v6 进行了完完全全的重构.                        |"
+    echo -e "| 它基于Python 3.8，并有许多改进.                       |"
     blank_line
-    echo -e "| ${yellow}NOTE: Version 6 is still in alpha, so bugs may occur!${white} |"
-    echo -e "| ${yellow}Yet, your feedback and bug reports are very much${white}      |"
-    echo -e "| ${yellow}appreciated and will help finalize the release.${white}       |"
+    echo -e "| ${yellow}注意：版本6仍处于alpha阶段，因此可能会出现错误!${white}       |"
+    echo -e "| ${yellow}然而，您的反馈和错误报告非常重要${white}                      |"
+    echo -e "| ${yellow}这将帮助完善最终版本的发布.${white}                           |"
     hr
-    echo -e "| Would you like to try out KIAUH v6?                   |"
-    echo -e "| 1) Yes                                                |"
+    echo -e "| 您想试用KIAUH V6吗?                                   |"
+    echo -e "| 1) 是的                                               |"
     echo -e "| 2) No                                                 |"
-    echo -e "| 3) Yes, remember my choice for next time              |"
+    echo -e "| 3) 是的，并且记住我的选择                             |"
     echo -e "| 4) No, remember my choice for next time               |"
     quit_footer
     while true; do
-      read -p "${cyan}###### Select action:${white} " -e input
+      read -p "${cyan}###### 执行选项:${white} " -e input
       case "${input}" in
         1)
           launch_kiauh_v6
@@ -144,10 +144,10 @@ function main() {
           launch_kiauh_v5
           break;;
         Q|q)
-          echo -e "${green}###### Happy printing! ######${white}"; echo
+          echo -e "${green}###### 打印愉快! ######${white}"; echo
           exit 0;;
         *)
-          error_msg "Invalid Input!\n";;
+          error_msg "错误的输入!\n";;
       esac
     done && input=""
   fi
