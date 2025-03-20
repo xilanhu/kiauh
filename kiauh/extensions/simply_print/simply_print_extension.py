@@ -22,9 +22,9 @@ from utils.input_utils import get_confirm
 # noinspection PyMethodMayBeStatic
 class SimplyPrintExtension(BaseExtension):
     def install_extension(self, **kwargs) -> None:
-        Logger.print_status("Installing SimplyPrint ...")
+        Logger.print_status("正在安装 SimplyPrint ...")
 
-        if not (mr_instances := moonraker_exists("SimplyPrint Installer")):
+        if not (mr_instances := moonraker_exists("SimplyPrint 安装程序")):
             return
 
         Logger.print_dialog(
@@ -33,23 +33,23 @@ class SimplyPrintExtension(BaseExtension):
         )
 
         if not get_confirm(
-            "Continue SimplyPrint installation?",
+            "继续 SimplyPrint 的安装?",
             default_choice=True,
             allow_go_back=True,
         ):
-            Logger.print_info("Exiting SimplyPrint installation ...")
+            Logger.print_info("正在退出 SimplyPrint 的安装 ...")
             return
 
         try:
             self._patch_moonraker_confs(mr_instances, True)
 
         except Exception as e:
-            Logger.print_error(f"Error during SimplyPrint installation:\n{e}")
+            Logger.print_error(f"安装 SimplyPrint 期间出现错误:\n{e}")
 
     def remove_extension(self, **kwargs) -> None:
-        Logger.print_status("Removing SimplyPrint ...")
+        Logger.print_status("在卸载 SimplyPrint ...")
 
-        if not (mr_instances := moonraker_exists("SimplyPrint Uninstaller")):
+        if not (mr_instances := moonraker_exists("SimplyPrint 卸载程序")):
             return
 
         Logger.print_dialog(
@@ -58,31 +58,31 @@ class SimplyPrintExtension(BaseExtension):
         )
 
         if not get_confirm(
-            "Do you really want to uninstall SimplyPrint?",
+            "您真的要卸载 SimplyPrint 吗?",
             default_choice=True,
             allow_go_back=True,
         ):
-            Logger.print_info("Exiting SimplyPrint uninstallation ...")
+            Logger.print_info("退出 SimplyPrint 的卸载 ...")
             return
 
         try:
             self._patch_moonraker_confs(mr_instances, False)
 
         except Exception as e:
-            Logger.print_error(f"Error during SimplyPrint installation:\n{e}")
+            Logger.print_error(f"卸载 SimplyPrint 期间出现错:\n{e}")
 
     def _construct_dialog(
         self, mr_instances: List[Moonraker], is_install: bool
     ) -> List[str]:
         mr_names = [f"● {m.service_file_path.name}" for m in mr_instances]
-        _type = "install" if is_install else "uninstall"
+        _type = "安装" if is_install else "卸载"
 
         return [
-            "The following Moonraker instances were found:",
+            "发现以下 Moonraker 的服务:",
             *mr_names,
             "\n\n",
-            f"The setup will {_type} SimplyPrint for all Moonraker instances. "
-            f"After {_type}ation, all Moonraker services will be restarted!",
+            f"将为所有 Moonraker 服务 {_type} SimplyPrint. "
+            f"{_type}完成后，所有 Moonraker 服务将重新启动!",
         ]
 
     def _patch_moonraker_confs(
@@ -105,9 +105,9 @@ class SimplyPrintExtension(BaseExtension):
             )
 
             if install_and_has_section or uninstall_and_has_no_section:
-                status = "already" if is_install else "does not"
+                status = "已存在" if is_install else "不存在"
                 Logger.print_info(
-                    f"Section 'simplyprint' {status} exists! Skipping ..."
+                    f"'simplyprint' 配置 {status} ! 跳过 ..."
                 )
                 continue
 
@@ -123,9 +123,9 @@ class SimplyPrintExtension(BaseExtension):
         if patched_files:
             InstanceManager.restart_all(mr_instances)
 
-        install_state = "successfully" if patched_files else "was already"
+        install_state = "成功" if patched_files else "已经"
         Logger.print_dialog(
             DialogType.SUCCESS,
-            [f"SimplyPrint {install_state} {'' if is_install else 'un'}installed!"],
+            [f"SimplyPrint {install_state} {'' if is_install else 'un'}!"],
             center_content=True,
         )
