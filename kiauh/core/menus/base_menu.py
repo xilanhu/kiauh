@@ -30,17 +30,17 @@ def clear() -> None:
 
 
 def print_header() -> None:
-    line1 = " [ KIAUH ] "
-    line2 = "Klipper Installation And Update Helper"
+    line1 = "[ KIAUH ] "
+    line2 = "Klipper安装与更新助手"
     line3 = ""
     color = Color.CYAN
-    count = 62 - len(str(color)) - len(str(Color.RST))
+    count = 55 - len(str(color)) - len(str(Color.RST))
     header = textwrap.dedent(
         f"""
         ╔═══════════════════════════════════════════════════════╗
-        ║ {Color.apply(f"{line1:~^{count}}", color)} ║
+        ║     {Color.apply(f"{line1:~^{count}}", color)}    ║
         ║ {Color.apply(f"{line2:^{count}}", color)} ║
-        ║ {Color.apply(f"{line3:~^{count}}", color)} ║
+        ║     {Color.apply(f"{line3:~^{count}}", color)}    ║
         ╚═══════════════════════════════════════════════════════╝
         """
     )[1:]
@@ -48,9 +48,9 @@ def print_header() -> None:
 
 
 def print_quit_footer() -> None:
-    text = "Q) Quit"
+    text = "Q) 退出"
     color = Color.RED
-    count = 62 - len(str(color)) - len(str(Color.RST))
+    count = 60 - len(str(color)) - len(str(Color.RST))
     footer = textwrap.dedent(
         f"""
         ║ {color}{text:^{count}}{Color.RST} ║
@@ -61,9 +61,9 @@ def print_quit_footer() -> None:
 
 
 def print_back_footer() -> None:
-    text = "B) « Back"
+    text = "B) « 返回"
     color = Color.GREEN
-    count = 62 - len(str(color)) - len(str(Color.RST))
+    count = 60 - len(str(color)) - len(str(Color.RST))
     footer = textwrap.dedent(
         f"""
         ║ {color}{text:^{count}}{Color.RST} ║
@@ -74,8 +74,8 @@ def print_back_footer() -> None:
 
 
 def print_back_help_footer() -> None:
-    text1 = "B) « Back"
-    text2 = "H) Help [?]"
+    text1 = "B) « 返回"
+    text2 = "H) 帮助 [?]"
     color1 = Color.GREEN
     color2 = Color.YELLOW
     count = 34 - len(str(color1)) - len(str(Color.RST))
@@ -110,7 +110,7 @@ class BaseMenu(metaclass=PostInitCaller):
     options: Dict[str, Option] = {}
     options_offset: int = 0
     default_option: Option = None
-    input_label_txt: str = "Perform action"
+    input_label_txt: str = "执行选项"
     header: bool = False
 
     loading_msg: str = ""
@@ -157,7 +157,7 @@ class BaseMenu(metaclass=PostInitCaller):
         self.help_menu(previous_menu=self.__class__).run()
 
     def __exit(self, **kwargs) -> None:
-        Logger.print_ok("###### Happy printing!", False)
+        Logger.print_ok("###### 打印愉快!", False)
         sys.exit(0)
 
     @abstractmethod
@@ -181,7 +181,7 @@ class BaseMenu(metaclass=PostInitCaller):
             self.spinner = None
 
     def __print_menu_title(self) -> None:
-        count = 62 - len(str(self.title_color)) - len(str(Color.RST))
+        count = 58 - len(str(self.title_color)) - len(str(Color.RST))
         menu_title = "╔═══════════════════════════════════════════════════════╗\n"
         if self.title:
             title = (
