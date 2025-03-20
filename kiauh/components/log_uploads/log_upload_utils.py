@@ -40,7 +40,7 @@ def get_display_name(filepath: Path) -> str:
 def upload_logfile(logfile: LogFile) -> None:
     file = logfile.get("filepath")
     name = logfile.get("display_name")
-    Logger.print_status(f"Uploading the following logfile from {name} ...")
+    Logger.print_status(f"正在上传日志文件 {name} ...")
 
     with open(file, "rb") as f:
         headers = {"x-random": ""}
@@ -48,7 +48,7 @@ def upload_logfile(logfile: LogFile) -> None:
         try:
             response = urllib.request.urlopen(req)
             link = response.read().decode("utf-8")
-            Logger.print_ok("Upload successful! Access it via the following link:")
+            Logger.print_ok("上传成功! 可通过以下链接访问：")
             Logger.print_ok(f">>>> {link}", False)
         except Exception as e:
             Logger.print_error("Uploading logfile failed!")
