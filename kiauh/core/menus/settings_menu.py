@@ -30,7 +30,7 @@ from utils.input_utils import get_confirm, get_string_input
 class SettingsMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None) -> None:
         super().__init__()
-        self.title = "Settings Menu"
+        self.title = "设置菜单"
         self.title_color = Color.CYAN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
 
@@ -72,29 +72,29 @@ class SettingsMenu(BaseMenu):
             f"""
             ╟───────────────────────────────────────────────────────╢
             ║ Klipper:                                              ║
-            ║  ● Repo:   {kl_repo:51} ║
-            ║  ● Owner:  {kl_owner:51} ║
-            ║  ● Branch: {kl_branch:51} ║
+            ║  ● 库:   {kl_repo:51}   ║
+            ║  ● 所有者:  {kl_owner:51}║
+            ║  ● 分支: {kl_branch:51}   ║
             ╟───────────────────────────────────────────────────────╢
             ║ Moonraker:                                            ║
-            ║  ● Repo:   {mr_repo:51} ║
-            ║  ● Owner:  {mr_owner:51} ║
-            ║  ● Branch: {mr_branch:51} ║
+            ║  ● 库:   {mr_repo:51}   ║
+            ║  ● 所有者:  {mr_owner:51}║
+            ║  ● 分支: {mr_branch:51}   ║
             ╟───────────────────────────────────────────────────────╢
-            ║ Install unstable releases:                            ║
+            ║ 安装测试版:                                           ║
             ║  {o1} Mainsail                                         ║
             ║  {o2} Fluidd                                           ║
             ╟───────────────────────────────────────────────────────╢
-            ║ Auto-Backup:                                          ║
-            ║  {o3} Automatic backup before update                   ║
+            ║ 自动备份:                                             ║
+            ║  {o3} 在更新之前自动备份                               ║
             ╟───────────────────────────────────────────────────────╢
-            ║ 1) Set Klipper source repository                      ║
-            ║ 2) Set Moonraker source repository                    ║
+            ║ 1) 设置 Klipper 的源存储库                            ║
+            ║ 2) 设置 Moonraker 的源存储库                          ║
             ║                                                       ║
-            ║ 3) Toggle unstable Mainsail releases                  ║
-            ║ 4) Toggle unstable Fluidd releases                    ║
+            ║ 3) 切换 测试版 Mainsail                               ║
+            ║ 4) 切换 测试版 Fluidd                                 ║
             ║                                                       ║
-            ║ 5) Toggle automatic backups before updates            ║
+            ║ 5) 在切换之前自动备份                                 ║
             ╟───────────────────────────────────────────────────────╢
             """
         )[1:]
@@ -125,30 +125,30 @@ class SettingsMenu(BaseMenu):
         self, repo_name: Literal["klipper", "moonraker"], repo_dir: Path
     ) -> Tuple[str, str]:
         warn_msg = [
-            "There is only basic input validation in place! "
-            "Make sure your the input is valid and has no typos or invalid characters!"
+            "当前仅实施基本输入验证! "
+            "请确保输入内容有效且无拼写错误或无效字符!"
         ]
 
         if repo_dir.exists():
             warn_msg.extend(
                 [
-                    "For the change to take effect, the new repository will be cloned. "
-                    "A backup of the old repository will be created.",
+                    "为使更改生效，将克隆新存储库. "
+                    "旧仓库的备份将被创建.",
                     "\n\n",
-                    "Make sure you don't have any ongoing prints running, as the services "
-                    "will be restarted during this process! You will loose any ongoing print!",
+                    "请确保没有任何正在进行的打印任务, 此过程中服务将重启 "
+                    "所有进行中的打印任务都将终止!!!",
                 ]
             )
 
         Logger.print_dialog(DialogType.ATTENTION, warn_msg)
 
         repo = get_string_input(
-            "Enter new repository URL",
+            "确认新存储库链接",
             regex=r"^[\w/.:-]+$",
             default=KLIPPER_REPO_URL if repo_name == "klipper" else MOONRAKER_REPO_URL,
         )
         branch = get_string_input(
-            "Enter new branch name", regex=r"^.+$", default="master"
+            "确认新分支名称", regex=r"^.+$", default="master"
         )
 
         return repo, branch
@@ -161,14 +161,14 @@ class SettingsMenu(BaseMenu):
         Logger.print_dialog(
             DialogType.CUSTOM,
             [
-                f"New {display_name} repository URL:",
+                f"新的 {display_name} 存储库 链接:",
                 f"● {repo_url}",
-                f"New {display_name} repository branch:",
+                f"新的 {display_name} 存储库 分支:",
                 f"● {branch}",
             ],
         )
 
-        if get_confirm("Apply changes?", allow_go_back=True):
+        if get_confirm("应用修改?", allow_go_back=True):
             repo: RepoSettings = self.settings[repo_name]
             repo.repo_url = repo_url
             repo.branch = branch
@@ -176,10 +176,10 @@ class SettingsMenu(BaseMenu):
             self.settings.save()
             self._load_settings()
 
-            Logger.print_ok("Changes saved!")
+            Logger.print_ok("修改已保存!")
         else:
             Logger.print_info(
-                f"Changing of {display_name} source repository canceled ..."
+                f"已取消切换至 {display_name} 存储库 ..."
             )
             return
 
@@ -192,7 +192,7 @@ class SettingsMenu(BaseMenu):
             return
 
         Logger.print_status(
-            f"Switching to {name.capitalize()}'s new source repository ..."
+            f"切换至新的 {name.capitalize()}'s 存储库 ..."
         )
 
         repo: RepoSettings = self.settings[name]
