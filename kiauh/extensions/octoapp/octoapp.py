@@ -53,7 +53,7 @@ class Octoapp:
         self.sys_cfg_file = self.base.cfg_dir.joinpath(OA_SYS_CFG_NAME)
 
     def create(self) -> None:
-        Logger.print_status("Creating OctoApp for Klipper Instance ...")
+        Logger.print_status("为 Klipper 创建 OctoApp 服务 ...")
 
         try:
             cmd = f"{OA_INSTALL_SCRIPT} {self.base.cfg_dir}/{MOONRAKER_CFG_NAME}"
@@ -69,5 +69,5 @@ class Octoapp:
             run(OA_UPDATE_SCRIPT.as_posix(), check=True, shell=True, cwd=OA_DIR)
 
         except CalledProcessError as e:
-            Logger.print_error(f"Error updating OctoApp for Klipper: {e}")
+            Logger.print_error(f"更新 OctoApp 时发生错误!: {e}")
             raise
