@@ -28,7 +28,7 @@ from extensions.base_extension import BaseExtension
 class ExtensionsMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None):
         super().__init__()
-        self.title = "Extensions Menu"
+        self.title = "扩展菜单"
         self.title_color = Color.CYAN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
         self.extensions: Dict[str, BaseExtension] = self.discover_extensions()
@@ -76,7 +76,7 @@ class ExtensionsMenu(BaseMenu):
                     ext_dict[f"{metadata.get('index')}"] = ext_instance
 
             except (IOError, json.JSONDecodeError, ImportError) as e:
-                print(f"Failed loading extension {ext}: {e}")
+                print(f"加载扩展失败 {ext}: {e}")
 
         return dict(sorted(ext_dict.items(), key=lambda x: int(x[0])))
 
@@ -84,7 +84,7 @@ class ExtensionsMenu(BaseMenu):
         ExtensionSubmenu(kwargs.get("opt_data"), self.__class__).run()
 
     def print_menu(self) -> None:
-        line1 = Color.apply("Available Extensions:", Color.YELLOW)
+        line1 = Color.apply("可用扩展:", Color.YELLOW)
         menu = textwrap.dedent(
             f"""
             ╟───────────────────────────────────────────────────────╢
@@ -146,15 +146,15 @@ class ExtensionSubmenu(BaseMenu):
         menu += textwrap.dedent(
             """
             ╟───────────────────────────────────────────────────────╢
-            ║ 1) Install                                            ║
+            ║ 1) 安装                                               ║
             """
         )[1:]
 
         if self.extension.metadata.get("updates"):
-            menu += "║ 2) Update                                             ║\n"
-            menu += "║ 3) Remove                                             ║\n"
+            menu += "║ 2) 升级                                               ║\n"
+            menu += "║ 3) 卸载                                               ║\n"
         else:
-            menu += "║ 2) Remove                                             ║\n"
+            menu += "║ 2) 卸载                                               ║\n"
         menu += "╟───────────────────────────────────────────────────────╢\n"
 
         print(menu, end="")
