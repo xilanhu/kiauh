@@ -81,8 +81,8 @@ def check_install_dependencies(
 
     requirements = check_package_install(deps)
     if requirements:
-        Logger.print_status("Installing dependencies ...")
-        Logger.print_info("The following packages need installation:")
+        Logger.print_status("安装依赖项 ...")
+        Logger.print_info("以下软件包需要安装:")
         for r in requirements:
             print(Color.apply(f"● {r}", Color.CYAN))
         update_system_package_lists(silent=False)
@@ -152,8 +152,8 @@ def backup_printer_config_dir() -> None:
     bm = BackupManager()
 
     if not instances:
-        Logger.print_info("Unable to find directory to backup!")
-        Logger.print_info("Are there no Klipper instances installed?")
+        Logger.print_info("找不到要备份的目录!")
+        Logger.print_info("是否未安装Klipper?")
         return
 
     for instance in instances:
@@ -173,17 +173,17 @@ def moonraker_exists(name: str = "") -> List[Moonraker]:
     mr_instances: List[Moonraker] = get_instances(Moonraker)
 
     info = (
-        f"{name} requires Moonraker to be installed"
+        f"{name} 要求必须安装 Moonraker "
         if name
-        else "A Moonraker installation is required"
+        else "Moonraker 未安装"
     )
 
     if not mr_instances:
         Logger.print_dialog(
             DialogType.WARNING,
             [
-                "No Moonraker instances found!",
-                f"{info}. Please install Moonraker first!",
+                "未找到Moonraker服务!",
+                f"{info}. 请先安装 Moonraker!",
             ],
         )
         return []
