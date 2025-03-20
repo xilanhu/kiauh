@@ -88,7 +88,7 @@ class ExtensionsMenu(BaseMenu):
         menu = textwrap.dedent(
             f"""
             ╟───────────────────────────────────────────────────────╢
-            ║ {line1:<62} ║
+            ║ {line1:<58} ║
             ║                                                       ║
             """
         )[1:]
