@@ -22,7 +22,7 @@ from core.types.color import Color
 class LogUploadMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None):
         super().__init__()
-        self.title = "Log Upload"
+        self.title = "日志上传"
         self.title_color = Color.YELLOW
         self.previous_menu: Type[BaseMenu] | None = previous_menu
         self.logfile_list = get_logfile_list()
@@ -42,7 +42,7 @@ class LogUploadMenu(BaseMenu):
         menu = textwrap.dedent(
             """
             ╟───────────────────────────────────────────────────────╢
-            ║ You can select the following logfiles for uploading:  ║
+            ║ 您可以选择以下日志文件进行上传:                       ║
             ║                                                       ║
             """
         )[1:]
@@ -64,4 +64,4 @@ class LogUploadMenu(BaseMenu):
             upload_logfile(self.logfile_list[index])
         except Exception as e:
             Logger.print_error(e)
-            Logger.print_error("Log upload failed!")
+            Logger.print_error("日志上传失败!")
