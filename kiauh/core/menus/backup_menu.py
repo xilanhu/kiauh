@@ -34,7 +34,7 @@ from utils.common import backup_printer_config_dir
 class BackupMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None) -> None:
         super().__init__()
-        self.title = "Backup Menu"
+        self.title = "备份菜单"
         self.title_color = Color.GREEN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
 
@@ -58,20 +58,20 @@ class BackupMenu(BaseMenu):
 
     def print_menu(self) -> None:
         line1 = Color.apply(
-            "INFO: Backups are located in '~/kiauh-backups'", Color.YELLOW
+            "提示: 备份的文件在 '~/kiauh-backups'", Color.YELLOW
         )
         menu = textwrap.dedent(
             f"""
             ╟───────────────────────────────────────────────────────╢
-            ║ {line1:^62} ║
+            ║ {line1:^54} ║
             ╟───────────────────────────┬───────────────────────────╢
-            ║ Klipper & Moonraker API:  │ Client-Config:            ║
+            ║ Klipper & Moonraker API:  │ 配置文件:                 ║
             ║  1) [Klipper]             │  7) [Mainsail-Config]     ║
             ║  2) [Moonraker]           │  8) [Fluidd-Config]       ║
             ║  3) [Config Folder]       │                           ║
-            ║  4) [Moonraker Database]  │ Touchscreen GUI:          ║
+            ║  4) [Moonraker Database]  │ 触摸屏插件:               ║
             ║                           │  9) [KlipperScreen]       ║
-            ║ Webinterface:             │                           ║
+            ║ 控制界面:                 │                           ║
             ║  5) [Mainsail]            │                           ║
             ║  6) [Fluidd]              │                           ║
             ╟───────────────────────────┴───────────────────────────╢
