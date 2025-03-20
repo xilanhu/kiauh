@@ -33,7 +33,7 @@ from core.types.color import Color
 class InstallMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None) -> None:
         super().__init__()
-        self.title = "Installation Menu"
+        self.title = "安装菜单"
         self.title_color = Color.GREEN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
         self.klsvc = KlipperSetupService()
@@ -59,15 +59,15 @@ class InstallMenu(BaseMenu):
         menu = textwrap.dedent(
             """
             ╟───────────────────────────┬───────────────────────────╢
-            ║ Firmware & API:           │ Touchscreen GUI:          ║
+            ║ 软件 & API:               │ 触摸屏插件:               ║
             ║  1) [Klipper]             │  7) [KlipperScreen]       ║
             ║  2) [Moonraker]           │                           ║
-            ║                           │ Webcam Streamer:          ║
-            ║ Webinterface:             │  8) [Crowsnest]           ║
+            ║                           │ 摄像插件:                 ║
+            ║ 控制界面:                 │  8) [Crowsnest]           ║
             ║  3) [Mainsail]            │                           ║
             ║  4) [Fluidd]              │                           ║
             ║                           │                           ║
-            ║ Client-Config:            │                           ║
+            ║ 配置文件:                 │                           ║
             ║  5) [Mainsail-Config]     │                           ║
             ║  6) [Fluidd-Config]       │                           ║
             ╟───────────────────────────┴───────────────────────────╢
