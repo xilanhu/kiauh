@@ -37,7 +37,7 @@ from utils.sys_utils import (
 class KlipperKConfigMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None):
         super().__init__()
-        self.title = "Firmware Config Menu"
+        self.title = "固件菜单"
         self.title_color = Color.CYAN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
         self.flash_options = FlashOptions()
@@ -65,7 +65,7 @@ class KlipperKConfigMenu(BaseMenu):
         if not Path(self.kconfigs_dirname).is_dir():
             return
 
-        self.input_label_txt = "Select config or action to continue (default=N)"
+        self.input_label_txt = "选择配置或操作以继续 (默认=N)"
         self.default_option = Option(
             method=self.select_config, opt_data=self.kconfig_default
         )
@@ -94,9 +94,9 @@ class KlipperKConfigMenu(BaseMenu):
             ╟───────────────────────────────────────────────────────╢
             ║ {cfg_found_str:^62} ║
             ║                                                       ║
-            ║    Select an existing config or create a new one.     ║
+            ║    选择现有配置或创建新配置.                          ║
             ╟───────────────────────────────────────────────────────╢
-            ║ Available firmware configs:                           ║
+            ║ 可用固件配置:                                         ║
             """
         )[1:]
 
@@ -105,7 +105,7 @@ class KlipperKConfigMenu(BaseMenu):
             line = f"{start_index + i}) {s.name}"
             menu += f"║ {line:<54}║\n"
 
-        new_config = Color.apply("N) Create new firmware config", Color.GREEN)
+        new_config = Color.apply("N) 创建新的固件配置", Color.GREEN)
         menu += "║                                                       ║\n"
         menu += f"║ {new_config:<62} ║\n"
 
@@ -129,7 +129,7 @@ class KlipperBuildFirmwareMenu(BaseMenu):
         self, kconfig: str | None = None, previous_menu: Type[BaseMenu] | None = None
     ):
         super().__init__()
-        self.title = "Build Firmware Menu"
+        self.title = "编译菜单"
         self.title_color = Color.CYAN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
         self.deps: Set[str] = {"build-essential", "dpkg-dev", "make"}
@@ -147,7 +147,7 @@ class KlipperBuildFirmwareMenu(BaseMenu):
         )
 
     def set_options(self) -> None:
-        self.input_label_txt = "Press ENTER to install dependencies"
+        self.input_label_txt = "ENTER键安装依赖项"
         self.default_option = Option(method=self.install_missing_deps)
 
     def run(self):
@@ -164,7 +164,7 @@ class KlipperBuildFirmwareMenu(BaseMenu):
             ╟───────────────────────────────────────────────────────╢
             ║ {txt:^62} ║
             ╟───────────────────────────────────────────────────────╢
-            ║ The following dependencies are required:              ║
+            ║ 需要以下依赖项:                                       ║
             ║                                                       ║
             """
         )[1:]
@@ -185,11 +185,11 @@ class KlipperBuildFirmwareMenu(BaseMenu):
     def install_missing_deps(self, **kwargs) -> None:
         try:
             update_system_package_lists(silent=False)
-            Logger.print_status("Installing system packages...")
+            Logger.print_status("安装系统软件包...")
             install_system_packages(self.missing_deps)
         except Exception as e:
             Logger.print_error(e)
-            Logger.print_error("Installing dependencies failed!")
+            Logger.print_error("安装依赖项失败!")
         finally:
             # restart this menu
             KlipperBuildFirmwareMenu().run()
@@ -200,15 +200,15 @@ class KlipperBuildFirmwareMenu(BaseMenu):
             run_make_menuconfig(self.kconfig)
             run_make(self.kconfig)
 
-            Logger.print_ok("Firmware successfully built!")
-            Logger.print_ok(f"Firmware file located in '{KLIPPER_DIR}/out'!")
+            Logger.print_ok("固件编译成功!")
+            Logger.print_ok(f"固件文件在 '{KLIPPER_DIR}/out'!")
 
             if self.kconfig == self.kconfig_default:
                 self.save_firmware_config()
 
         except Exception as e:
             Logger.print_error(e)
-            Logger.print_error("Building Klipper Firmware failed!")
+            Logger.print_error("固件编译失败!")
 
         finally:
             if self.previous_menu is not None:
@@ -218,13 +218,13 @@ class KlipperBuildFirmwareMenu(BaseMenu):
         Logger.print_dialog(
             DialogType.CUSTOM,
             [
-                "You can save the firmware build configs for multiple MCUs,"
-                " and use them to update the firmware after a Klipper version upgrade"
+                "您可以保存多个MCU的固件配置,"
+                " 并在Klipper版本升级后使用它们来更新固件"
             ],
             custom_title="Save firmware config",
         )
         if not get_confirm(
-            "Do you want to save firmware config?", default_choice=False
+            "是否保存固件配置?", default_choice=False
         ):
             return
 
@@ -233,36 +233,36 @@ class KlipperBuildFirmwareMenu(BaseMenu):
             Logger.print_dialog(
                 DialogType.CUSTOM,
                 [
-                    "Allowed characters: a-z, 0-9 and '-'",
-                    "The name must not contain the following:",
+                    "允许使用的字符: 小写字母 a-z、数字 0-9 和连字符 '-'",
+                    "命名必须遵守以下规则:",
                     "\n\n",
-                    "● Any special characters",
-                    "● No leading or trailing '-'",
+                    "● 不能包含特殊字符",
+                    "● 开头或结尾不能使用连字符 '-'",
                 ],
             )
             input_name = get_string_input(
-                "Enter the new firmware config name",
+                "输入新的固件配置名称",
                 regex=r"^[a-z0-9]+([a-z0-9-]*[a-z0-9])?$",
             )
             filename = self.kconfigs_dirname.joinpath(f"{input_name}.config")
 
             if Path(filename).is_file():
                 if get_confirm(
-                    f"Firmware config {input_name} already exists, overwrite?",
+                    f"固件配置 {input_name} 已存在，覆盖?",
                     default_choice=False,
                 ):
                     break
 
             if Path(filename).is_dir():
-                Logger.print_error(f"Path {filename} exists and it's a directory")
+                Logger.print_error(f"路径 {filename} 存在，并且它是一个目录")
 
             if not Path(filename).exists():
                 break
 
         if not get_confirm(
-            f"Save firmware config to '{filename}'?", default_choice=True
+            f"将固件配置保存到 '{filename}'?", default_choice=True
         ):
-            Logger.print_info("Aborted saving firmware config ...")
+            Logger.print_info("已取消保存固件配置 ...")
             return
 
         if not Path(self.kconfigs_dirname).exists():
@@ -271,4 +271,4 @@ class KlipperBuildFirmwareMenu(BaseMenu):
         copyfile(self.kconfig_default, filename)
 
         Logger.print_ok()
-        Logger.print_ok(f"Firmware config successfully saved to {filename}")
+        Logger.print_ok(f"固件配置已成功保存到 {filename}")
