@@ -50,10 +50,10 @@ from utils.sys_utils import (
 class UpdateMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None) -> None:
         super().__init__()
-        self.loading_msg = "Loading update menu, please wait"
+        self.loading_msg = "正在加载更新菜单，请稍候"
         self.is_loading(True)
 
-        self.title = "Update Menu"
+        self.title = "更新菜单"
         self.title_color = Color.GREEN
         self.previous_menu: Type[BaseMenu] | None = previous_menu
 
@@ -145,43 +145,43 @@ class UpdateMenu(BaseMenu):
         }
 
     def print_menu(self) -> None:
-        sysupgrades: str = "No upgrades available."
+        sysupgrades: str = "没有可用的更新."
         padding = 29
         if self.package_count > 0:
             sysupgrades = Color.apply(
-                f"{self.package_count} upgrades available!", Color.GREEN
+                f"{self.package_count} 更新可用!", Color.GREEN
             )
-            padding = 38
+            padding = 34
 
         menu = textwrap.dedent(
             f"""
             ╟───────────────────────┬───────────────┬───────────────╢
-            ║  a) Update all        │               │               ║
-            ║                       │ Current:      │ Latest:       ║
+            ║  a) 全部更新          │               │               ║
+            ║                       │ 当前:         │ 最新:         ║
             ║ Klipper & API:        ├───────────────┼───────────────╢
             ║  1) Klipper           │ {self.klipper_local:<22} │ {self.klipper_remote:<22} ║
             ║  2) Moonraker         │ {self.moonraker_local:<22} │ {self.moonraker_remote:<22} ║
             ║                       │               │               ║
-            ║ Webinterface:         ├───────────────┼───────────────╢
+            ║ 控制界面:             ├───────────────┼───────────────╢
             ║  3) Mainsail          │ {self.mainsail_local:<22} │ {self.mainsail_remote:<22} ║
             ║  4) Fluidd            │ {self.fluidd_local:<22} │ {self.fluidd_remote:<22} ║
             ║                       │               │               ║
-            ║ Client-Config:        ├───────────────┼───────────────╢
+            ║ 配置文件:             ├───────────────┼───────────────╢
             ║  5) Mainsail-Config   │ {self.mainsail_config_local:<22} │ {self.mainsail_config_remote:<22} ║
             ║  6) Fluidd-Config     │ {self.fluidd_config_local:<22} │ {self.fluidd_config_remote:<22} ║
             ║                       │               │               ║
-            ║ Other:                ├───────────────┼───────────────╢
+            ║ 其他:                 ├───────────────┼───────────────╢
             ║  7) KlipperScreen     │ {self.klipperscreen_local:<22} │ {self.klipperscreen_remote:<22} ║
             ║  8) Crowsnest         │ {self.crowsnest_local:<22} │ {self.crowsnest_remote:<22} ║
             ║                       ├───────────────┴───────────────╢
-            ║  9) System            │ {sysupgrades:^{padding}} ║
+            ║  9) 系统              │ {sysupgrades:^{padding}} ║
             ╟───────────────────────┴───────────────────────────────╢
             """
         )[1:]
         print(menu, end="")
 
     def update_all(self, **kwargs) -> None:
-        Logger.print_status("Updating all components ...")
+        Logger.print_status("更新所有组件 ...")
         self.update_klipper()
         self.update_moonraker()
         self.update_mainsail()
@@ -297,30 +297,30 @@ class UpdateMenu(BaseMenu):
         is_update_available = self._is_update_available(name)
 
         if not is_installed:
-            Logger.print_info(f"{display_name} is not installed! Skipped ...")
+            Logger.print_info(f"{display_name} 未安装! 跳过 ...")
             return
         elif not is_update_available:
-            Logger.print_info(f"{display_name} is already up to date! Skipped ...")
+            Logger.print_info(f"{display_name} 已经是最新的版本! 跳过 ...")
             return
 
         update_fn(*args)
 
     def _run_system_updates(self) -> None:
         if not self.packages:
-            Logger.print_info("No system upgrades available!")
+            Logger.print_info("没有可用的系统更新!")
             return
 
         try:
             pkgs: str = ", ".join(self.packages)
             Logger.print_dialog(
                 DialogType.CUSTOM,
-                ["The following packages will be upgraded:", "\n\n", pkgs],
-                custom_title="UPGRADABLE SYSTEM UPDATES",
+                ["将更新以下软件包:", "\n\n", pkgs],
+                custom_title="系统更新可用",
             )
-            if not get_confirm("Continue?"):
+            if not get_confirm("继续?"):
                 return
-            Logger.print_status("Upgrading system packages ...")
+            Logger.print_status("更新中 ...")
             upgrade_system_packages(self.packages)
         except Exception as e:
-            Logger.print_error(f"Error upgrading system packages:\n{e}")
+            Logger.print_error(f"无法更新软件包:\n{e}")
             raise
