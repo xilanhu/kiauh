@@ -30,7 +30,7 @@ from core.types.color import Color
 class RemoveMenu(BaseMenu):
     def __init__(self, previous_menu: Type[BaseMenu] | None = None) -> None:
         super().__init__()
-        self.title = "Remove Menu"
+        self.title = "卸载菜单"
         self.title_color = Color.RED
         self.previous_menu: Type[BaseMenu] | None = previous_menu
 
@@ -53,13 +53,13 @@ class RemoveMenu(BaseMenu):
         menu = textwrap.dedent(
             """
             ╟───────────────────────────────────────────────────────╢
-            ║ INFO: Configurations and/or any backups will be kept! ║
+            ║ 提示: 配置/和备份文件将保留!                          ║
             ╟───────────────────────────┬───────────────────────────╢
-            ║ Firmware & API:           │ Touchscreen GUI:          ║
+            ║ Firmware & API:           │ 触摸屏插件:               ║
             ║  1) [Klipper]             │  5) [KlipperScreen]       ║
             ║  2) [Moonraker]           │                           ║
-            ║                           │ Webcam Streamer:          ║
-            ║ Klipper Webinterface:     │  6) [Crowsnest]           ║
+            ║                           │ 摄像插件:                 ║
+            ║ Klipper 控制界面:         │  6) [Crowsnest]           ║
             ║  3) [Mainsail]            │                           ║
             ║  4) [Fluidd]              │                           ║
             ╟───────────────────────────┴───────────────────────────╢
