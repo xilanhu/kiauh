@@ -45,7 +45,7 @@ class MainMenu(BaseMenu):
         super().__init__()
 
         self.header: bool = True
-        self.title = "Main Menu"
+        self.title = "主页菜单"
         self.title_color = Color.CYAN
         self.footer_type: FooterType = FooterType.QUIT
 
@@ -57,7 +57,7 @@ class MainMenu(BaseMenu):
         self._init_status()
 
     def set_previous_menu(self, previous_menu: Type[BaseMenu] | None) -> None:
-        """MainMenu does not have a previous menu"""
+        """主菜单没有上级菜单"""
         pass
 
     def set_options(self) -> None:
@@ -78,11 +78,11 @@ class MainMenu(BaseMenu):
             setattr(
                 self,
                 f"{var}_status",
-                Color.apply("Not installed", Color.RED),
+                Color.apply("未安装", Color.RED),
             )
 
     def _fetch_status(self) -> None:
-        self.version = get_kiauh_version()
+        self.version = "Kiauh更新已禁用"
         self._get_component_status("kl", get_klipper_status)
         self._get_component_status("mr", get_moonraker_status)
         self._get_component_status("ms", get_client_status, MainsailData())
@@ -122,36 +122,36 @@ class MainMenu(BaseMenu):
         self._fetch_status()
 
         footer1 = Color.apply(self.version, Color.CYAN)
-        link = Color.apply("https://git.io/JnmlX", Color.MAGENTA)
-        footer2 = f"Changelog: {link}"
+        link = Color.apply("By: Xilanhu", Color.MAGENTA)
+        footer2 = f"Kiauh加速  {link}"
         pad1 = 32
         pad2 = 26
         menu = textwrap.dedent(
             f"""
             ╟──────────────────┬────────────────────────────────────╢
-            ║  0) [Log-Upload] │   Klipper: {self.kl_status:<{pad1}} ║
+            ║  0) [日志上传]   │   Klipper: {self.kl_status:<{pad1}} ║
             ║                  │     Owner: {self.kl_owner:<{pad1}} ║
-            ║  1) [Install]    │      Repo: {self.kl_repo:<{pad1}} ║
-            ║  2) [Update]     ├────────────────────────────────────╢
-            ║  3) [Remove]     │ Moonraker: {self.mr_status:<{pad1}} ║
-            ║  4) [Advanced]   │     Owner: {self.mr_owner:<{pad1}} ║
-            ║  5) [Backup]     │      Repo: {self.mr_repo:<{pad1}} ║
+            ║  1) [安装]       │      Repo: {self.kl_repo:<{pad1}} ║
+            ║  2) [更新]       ├────────────────────────────────────╢
+            ║  3) [卸载]       │ Moonraker: {self.mr_status:<{pad1}} ║
+            ║  4) [高级]       │     Owner: {self.mr_owner:<{pad1}} ║
+            ║  5) [备份]       │      Repo: {self.mr_repo:<{pad1}} ║
             ║                  ├────────────────────────────────────╢
-            ║  S) [Settings]   │        Mainsail: {self.ms_status:<{pad2}} ║
+            ║  S) [设置]       │        Mainsail: {self.ms_status:<{pad2}} ║
             ║                  │          Fluidd: {self.fl_status:<{pad2}} ║
-            ║ Community:       │   Client-Config: {self.cc_status:<{pad2}} ║
-            ║  E) [Extensions] │                                    ║
+            ║ 社区:            │   Client-Config: {self.cc_status:<{pad2}} ║
+            ║  E) [扩展]       │                                    ║
             ║                  │   KlipperScreen: {self.ks_status:<{pad2}} ║
             ║                  │       Crowsnest: {self.cn_status:<{pad2}} ║
             ╟──────────────────┼────────────────────────────────────╢
-            ║ {footer1:^25} │ {footer2:^43} ║
+            ║ {footer1:^20} │ {footer2:^41} ║
             ╟──────────────────┴────────────────────────────────────╢
             """
         )[1:]
         print(menu, end="")
 
     def exit(self, **kwargs) -> None:
-        Logger.print_ok("###### Happy printing!", False)
+        Logger.print_ok("###### 打印愉快!", False)
         sys.exit(0)
 
     def log_upload_menu(self, **kwargs) -> None:
