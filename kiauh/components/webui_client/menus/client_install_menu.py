@@ -57,8 +57,8 @@ class ClientInstallMenu(BaseMenu):
         menu = textwrap.dedent(
             f"""
             ╟───────────────────────────────────────────────────────╢
-            ║  1) Reinstall {client_name:16}                        ║
-            ║  2) Reconfigure Listen Port {port:<34} ║
+            ║  1) 重新安装 {client_name:16}                         ║
+            ║  2) 重新配置端口 {port:<34}            ║
             ╟───────────────────────────────────────────────────────╢
             """
         )[1:]
@@ -78,18 +78,18 @@ class ClientInstallMenu(BaseMenu):
         cmd_sysctl_service("nginx", "stop")
         set_listen_port(self.client, curr_port, new_port)
 
-        Logger.print_status("Saving new port configuration ...")
+        Logger.print_status("正在保存新端口配置 ...")
         self.client_settings.port = new_port
         self.settings.save()
-        Logger.print_ok("Port configuration saved!")
+        Logger.print_ok("端口配置已保存!")
 
         cmd_sysctl_service("nginx", "start")
 
         # noinspection HttpUrlsUsage
         message = Message(
-            title="Port reconfiguration complete!",
+            title="端口重新配置完成!",
             text=[
-                f"Open {self.client.display_name} now on: "
+                f"{self.client.display_name} 的新地址: "
                 f"http://{get_ipv4_addr()}:{new_port}",
             ],
             color=Color.GREEN,
